@@ -59,6 +59,9 @@ SELECT * FROM board;
 
 COMMIT;
 
+INSERT INTO board(title,content,author) VALUES ('더미글9','여기는 더미글9 입니다','admin');
+INSERT INTO board(title,content,author) VALUES ('더미글10','여기는 더미글10 입니다','admin');
+INSERT INTO board(title,content,author) VALUES ('더미글11','여기는 더미글11 입니다','admin');
 ----------------------------------------------------------------
 
 

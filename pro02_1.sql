@@ -1,12 +1,12 @@
 create table customer(
-customerid varchar(15) primary KEY COMMENT '고객id',
-customername varchar(50) not NULL COMMENT '고객이름',
-customertype varchar(50) not NULL COMMENT '고객구분',
-country varchar(50) not NULL COMMENT '국적',
-city varchar(50) COMMENT '도시',
-state varchar(50) COMMENT '주',
-postcode INT COMMENT '우편번호',
-regiontype varchar(50) COMMENT '지역구분' 
+customerid varchar(15) primary KEY COMMENT '怨좉컼id',
+customername varchar(50) not NULL COMMENT '怨좉컼?대쫫',
+customertype varchar(50) not NULL COMMENT '怨좉컼援щ텇',
+country varchar(50) not NULL COMMENT '援?쟻',
+city varchar(50) COMMENT '?꾩떆',
+state varchar(50) COMMENT '二?,
+postcode INT COMMENT '?고렪踰덊샇',
+regiontype varchar(50) COMMENT '吏??뎄遺? 
 );
 
 create table buy (
@@ -34,18 +34,18 @@ SHOW TABLES;
 DESC product;
 DROP TABLE product;
 
--- 대단위 데이터 csv파일을 해당 테이블에 import하기
+-- ??⑥쐞 ?곗씠??csv?뚯씪???대떦 ?뚯씠釉붿뿉 import?섍린
 LOAD DATA LOCAL INFILE 'buy.csv' INTO TABLE customer FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n';
 
 
--- 해당 데이터를 csv로 export 하기
--- 해당 테이블 먼저 검색(select)
+-- ?대떦 ?곗씠?곕? csv濡?export ?섍린
+-- ?대떦 ?뚯씠釉?癒쇱? 寃??select)
 SELECT * FROM product;
--- 검색 결과에서 전체 선택한 후 마우스 오른쪽[격자 행 내보내기]
--- 내보낼 타입을 Excel csv 선택하고, 해당 파일의 이름과 경로를 지정
--- 내보내기
+-- 寃??寃곌낵?먯꽌 ?꾩껜 ?좏깮????留덉슦???ㅻⅨ履?寃⑹옄 ???대낫?닿린]
+-- ?대낫????낆쓣 Excel csv ?좏깮?섍퀬, ?대떦 ?뚯씪???대쫫怨?寃쎈줈瑜?吏??
+-- ?대낫?닿린
 
--- SQL 파일 실행하여 sql 명령을 실행하기. (터미널에서 파일있는 경로에서 실행할 것.)
+-- SQL ?뚯씪 ?ㅽ뻾?섏뿬 sql 紐낅졊???ㅽ뻾?섍린. (?곕??먯뿉???뚯씪?덈뒗 寃쎈줈?먯꽌 ?ㅽ뻾??寃?)
 SOURCE test2.sql;
 
 
@@ -70,7 +70,7 @@ SELECT * FROM customer WHERE customername LIKE '%Kim%' AND city='Seoul';
 SELECT COUNT(*) AS cnt FROM customer WHERE customername LIKE '%Kim%';
 
 
--- 회원 등록
+-- ?뚯썝 ?깅줉
 INSERT INTO customer VALUES(?, ?, ?, ?, ?, ?, ?, ?);
 pstmt.setString(1, cus.getCumtomerid());
 pstmt.setString(2, cus.getCumtomername());
@@ -84,9 +84,9 @@ pstmt.setString(8, cus.getRegiontype());
 
 SELECT * FROM customer WHERE customername LIKE '%Kim%';
 
--- 고객 정보 변경
+-- 怨좉컼 ?뺣낫 蹂寃?
 UPDATE customer SET country='America',city='Los Angels', state='Los Angels' WHERE customerid = 'AK-10880';
--- 웹에서 고객 정보 변경
+-- ?뱀뿉??怨좉컼 ?뺣낫 蹂寃?
 UPDATE customer SET country=?,city=?, state=? WHERE customerid = ?;
 pstmt.setSting(1,cus.getCountry());
 pstmt.setSting(2,cus.getCity());
@@ -95,9 +95,9 @@ pstmt.setSting(4,cus.getCustomerid());
 
 
 
--- 고객 삭제
+-- 怨좉컼 ??젣
 DELETE FROM customer WHERE customerid='AK-10880';
--- 웹에서 고객 삭제
+-- ?뱀뿉??怨좉컼 ??젣
 DELETE FROM customer WHERE customerid=?;
 pstmt.setString(1,customerid);
 
@@ -109,36 +109,36 @@ pstmt.setString(1,customerid);
 SHOW TABLES;
 SELECT * FROM buy;
 
--- customerid 별로 그룹화하여 customerid, 제품거래건수, 총수량, 평균 할인율을 출력
--- SELECT customerid, COUNT(*) AS 제품거래건수,SUM(*) AS 총수량,avg
+-- customerid 蹂꾨줈 洹몃９?뷀븯??customerid, ?쒗뭹嫄곕옒嫄댁닔, 珥앹닔?? ?됯퇏 ?좎씤?⑥쓣 異쒕젰
+-- SELECT customerid, COUNT(*) AS ?쒗뭹嫄곕옒嫄댁닔,SUM(*) AS 珥앹닔??avg
 
-SELECT customerid,COUNT(productid) AS 제품거래건수,SUM(quantity) AS 총수량, 
-avg(discount) AS 평균할인율 FROM buy GROUP BY customerid;
+SELECT customerid,COUNT(productid) AS ?쒗뭹嫄곕옒嫄댁닔,SUM(quantity) AS 珥앹닔?? 
+avg(discount) AS ?됯퇏?좎씤??FROM buy GROUP BY customerid;
 
 
--- buy 테이블에서 할인율이 가장 작은 거래 정보를 수량(quantity)의 내림차순으로 출력하시오.
--- (단 수량이 같은 경우 주문일(orderdate)의 오름차순으로 하시오
+-- buy ?뚯씠釉붿뿉???좎씤?⑥씠 媛???묒? 嫄곕옒 ?뺣낫瑜??섎웾(quantity)???대┝李⑥닚?쇰줈 異쒕젰?섏떆??
+-- (???섎웾??媛숈? 寃쎌슦 二쇰Ц??orderdate)???ㅻ쫫李⑥닚?쇰줈 ?섏떆??
 SELECT * FROM buy where discount = (select min(discount) from buy) 
 ORDER BY quantity DESC, orderdate ASC;
 
--- 배송일(shipdate)의 년도별로 총수량의 합계와 총수량의 평균, 총수량의 최대값을 집계하시오.
--- 년도를 추출하는 함수는 year
+-- 諛곗넚??shipdate)???꾨룄蹂꾨줈 珥앹닔?됱쓽 ?⑷퀎? 珥앹닔?됱쓽 ?됯퇏, 珥앹닔?됱쓽 理쒕?媛믪쓣 吏묎퀎?섏떆??
+-- ?꾨룄瑜?異붿텧?섎뒗 ?⑥닔??year
 
-SELECT YEAR(shipdate) AS 년도,SUM(quantity) AS '총합계', AVG(quantity) AS '총평균',MAX(quantity)
-AS 최대배송량 FROM buy GROUP BY YEAR(shipdate);
+SELECT YEAR(shipdate) AS ?꾨룄,SUM(quantity) AS '珥앺빀怨?, AVG(quantity) AS '珥앺룊洹?,MAX(quantity)
+AS 理쒕?諛곗넚??FROM buy GROUP BY YEAR(shipdate);
 
--- 주문일(orderdate)의 년도와 월별로 주문수량(quantity)의 합계와 평균 할인율을 집계하시오.
--- (date_format 함수를 사용) dateformat(컬럼,형식)
-SELECT DATE_FORMAT(orderdate,'%y-%m') AS 년도, SUM(quantity) AS 주문량합계, 
-AVG(discount) AS 할인율평균
+-- 二쇰Ц??orderdate)???꾨룄? ?붾퀎濡?二쇰Ц?섎웾(quantity)???⑷퀎? ?됯퇏 ?좎씤?⑥쓣 吏묎퀎?섏떆??
+-- (date_format ?⑥닔瑜??ъ슜) dateformat(而щ읆,?뺤떇)
+SELECT DATE_FORMAT(orderdate,'%y-%m') AS ?꾨룄, SUM(quantity) AS 二쇰Ц?됲빀怨? 
+AVG(discount) AS ?좎씤?⑦룊洹?
 FROM buy GROUP BY DATE_FORMAT(orderdate,'%y-%m') HAVING SUM(quantity) != 0;
 
 
--- 제품번호(productid)가 FUR로 시작하는 가구 종류를 구매한 고객정보 중에서
--- 고객명(customername), 국가(country), 도시(city)를 출력하되,
--- 고객id(customerid)의 내림차순으로 하고, 
--- 고객id가 같은 경우 주문수량(quantitiy)의 오름차순으로 할 것.
--- 이중쿼리, 연관쿼리, 내부조인 등 원하는 방식으로 해결
+-- ?쒗뭹踰덊샇(productid)媛 FUR濡??쒖옉?섎뒗 媛援?醫낅쪟瑜?援щℓ??怨좉컼?뺣낫 以묒뿉??
+-- 怨좉컼紐?customername), 援??(country), ?꾩떆(city)瑜?異쒕젰?섎릺,
+-- 怨좉컼id(customerid)???대┝李⑥닚?쇰줈 ?섍퀬, 
+-- 怨좉컼id媛 媛숈? 寃쎌슦 二쇰Ц?섎웾(quantitiy)???ㅻ쫫李⑥닚?쇰줈 ??寃?
+-- ?댁쨷荑쇰━, ?곌?荑쇰━, ?대?議곗씤 ???먰븯??諛⑹떇?쇰줈 ?닿껐
 SELECT a.customername, a.country, a.city FROM customer a, buy b 
 WHERE a.customerid = b.customerid AND b.productid LIKE 'FUR%' ORDER BY a.customerid DESC, b.quantity ASC;
 
@@ -146,29 +146,29 @@ SELECT a.customername, a.country, a.city FROM customer a inner join buy b on
 a.customerid = b.customerid AND b.productid LIKE 'FUR%' ORDER BY a.customerid DESC, b.quantity ASC;
 
 
--- 제품(product) 테이블로부터 가격(price)이 40 이상인 제품을 검색하여 제품2(product2) 테이블을 생성하시오
--- 제품(product) 테이블로부터 가격(price)이 40 미만인 제품을 검색하여 제품3(product3) 테이블을 생성하시오
+-- ?쒗뭹(product) ?뚯씠釉붾줈遺??媛寃?price)??40 ?댁긽???쒗뭹??寃?됲븯???쒗뭹2(product2) ?뚯씠釉붿쓣 ?앹꽦?섏떆??
+-- ?쒗뭹(product) ?뚯씠釉붾줈遺??媛寃?price)??40 誘몃쭔???쒗뭹??寃?됲븯???쒗뭹3(product3) ?뚯씠釉붿쓣 ?앹꽦?섏떆??
 SELECT * FROM product;
 CREATE TABLE product2 AS (SELECT * FROM product WHERE price >= 40);
 CREATE TABLE product3 AS (SELECT * FROM product WHERE price < 40);
 
 
--- 제품3(product3) 테이블로부터 price가 0인 레코드를 삭제하시오.
+-- ?쒗뭹3(product3) ?뚯씠釉붾줈遺??price媛 0???덉퐫?쒕? ??젣?섏떆??
 DELETE FROM product3 WHERE price=0;
 
 SHOW TABLES;
 SELECT * FROM product3; WHERE price =0;
 SELECT * FROM product2;
 
--- 제품명(productname)에 " 가 있는 데이터의 "를 제거
+-- ?쒗뭹紐?productname)??" 媛 ?덈뒗 ?곗씠?곗쓽 "瑜??쒓굅
 UPDATE product2 SET productname = SUBSTRING(productname, 2, LENGTH(productname)-1)
 WHERE productname LIKE '\"%'; 
 
 
--- union - 중복 제거 합집합
--- union all - 중복 포함 합집합
--- 교집합 intersect
--- 차집합 except
+-- union - 以묐났 ?쒓굅 ?⑹쭛??
+-- union all - 以묐났 ?ы븿 ?⑹쭛??
+-- 援먯쭛??intersect
+-- 李⑥쭛??except
 CREATE VIEW uni_tab1 AS (SELECT productid,price FROM product2 UNION SELECT productid,price FROM product3);
 CREATE VIEW int_tab1 AS (SELECT productid,price FROM product2 intersect SELECT productid,price FROM product3);
 CREATE VIEW exc_tab1 AS (SELECT productid,price FROM product EXCEPT SELECT productid,price FROM product2);
@@ -179,20 +179,20 @@ SELECT * from exc_tab1;
 
 
 
--- 제품2(product2)와 제품3(product3)의 테이블 데이터를 합집합하여 전체상품(totpro)의 테이블을 생성하시오
+-- ?쒗뭹2(product2)? ?쒗뭹3(product3)???뚯씠釉??곗씠?곕? ?⑹쭛?⑺븯???꾩껜?곹뭹(totpro)???뚯씠釉붿쓣 ?앹꽦?섏떆??
 CREATE TABLE totpro AS(SELECT * FROM product2 UNION SELECT * FROM product3  );
--- 제품(product1)와 제품3(product3)의 테이블 데이터를 차집합하여 제거상품(revpro)의 테이블을 생성
+-- ?쒗뭹(product1)? ?쒗뭹3(product3)???뚯씠釉??곗씠?곕? 李⑥쭛?⑺븯???쒓굅?곹뭹(revpro)???뚯씠釉붿쓣 ?앹꽦
 CREATE TABLE revpro AS(SELECT * FROM product1 EXCEPT SELECT * FROM product3);
--- 제품(product)와 제품2(product2)의 테이블 데이터를 교집합하여 인기상품(hotpro)의 테이블을 생성
+-- ?쒗뭹(product)? ?쒗뭹2(product2)???뚯씠釉??곗씠?곕? 援먯쭛?⑺븯???멸린?곹뭹(hotpro)???뚯씠釉붿쓣 ?앹꽦
 CREATE TABLE hotpro AS(SELECT * FROM product intersect SELECT * FROM product2);
 
 
--- 특정 고객의 주문정보를 검색
+-- ?뱀젙 怨좉컼??二쇰Ц?뺣낫瑜?寃??
 SELECT * FROM buy WHERE customerid = '';
 SELECT * FROM buy WHERE customerid = '';
 pstmt.setString(1,customerid);
 
--- 특정 고객의 본인 정보
+-- ?뱀젙 怨좉컼??蹂몄씤 ?뺣낫
 SELECT * FROM customer WHERE customerid= '';
 SELECT * FROM customer WHERE customerid = '';
 pstmt.setString(1,customerid);
@@ -203,6 +203,46 @@ pstmt.setString(1,customerid);
 
 
 -- controller
+
+
+
+
+
+
+
+-- 0802
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
